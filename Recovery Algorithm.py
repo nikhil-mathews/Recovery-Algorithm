@@ -1,8 +1,9 @@
-
+#f = open("transaction log.txt", "r")
+#print(f.read())
+#print("++++++++++++++"+f.readline(2))
 import inspect
-"""
-This gives the undo and redo processes based on recovery algorithm in Database System Concepts textbook. The input is transaction log.txt
-"""
+import math
+
 
 def transaction_in(line):
     if line[1] != 'T':
@@ -50,7 +51,7 @@ def bottom_up_search(lines,s,start=None,end=0):      #searches from bottom to re
         start = len(lines) - 1
     while lines[start].find(s) == -1:
         start -= 1
-        if end == start:
+        if start==-1:
             return None
     return start
 
@@ -62,11 +63,24 @@ for i in range(len(lines)):
 
 
 checkpointloc=bottom_up_search(lines,"CHECKPOINT")
+
+
 L = set(transactions_in_checkpoint(lines[checkpointloc]))
+
 
 # REDO PHASE
 print("**********REDO PHASE************")
-for i in range(checkpointloc + 1, len(lines)):
+
+for i in range(checkpointloc):
+    if transaction_in(lines[i]) not in L:
+        lines[i]=None
+
+
+lines = [i for i in lines if i]
+
+print("Starting redo from line: "+lines[0]+"\n")
+
+for i in range(len(lines)):
     #print(lines[i])
     if lines[i].find("START")!=-1:
         L.add(transaction_in(lines[i]))
@@ -80,8 +94,9 @@ for i in range(checkpointloc + 1, len(lines)):
         L.remove(transaction_in(lines[i]))
         print("Removing " + transaction_in(lines[i]) + " from L")
         print("L: " + str(L))
-    else:
+    elif lines[i].count(',')>1:
         print("Set "+data_item(lines[i])+" to " +last_value(lines[i]))
+    else:pass
 
 # UNDO PHASE
 print("\n\n**********UNDO PHASE************")
@@ -115,4 +130,3 @@ while 1:
     i-=1
     if i==0:
         print("Start for items in "+ str(L)+ " not found")
-        exit()
