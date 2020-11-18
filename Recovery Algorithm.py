@@ -1,6 +1,3 @@
-#f = open("transaction log.txt", "r")
-#print(f.read())
-#print("++++++++++++++"+f.readline(2))
 import inspect
 import math
 
