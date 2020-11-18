@@ -63,6 +63,7 @@ checkpointloc=bottom_up_search(lines,"CHECKPOINT")
 
 
 L = set(transactions_in_checkpoint(lines[checkpointloc]))
+print("\nL: "+str(L)+"\n")
 
 
 # REDO PHASE
