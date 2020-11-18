@@ -1,0 +1,14 @@
+<T1 START>
+<T1, A, 3, 4>
+<T2 START>
+<T2, B, 1, 2>
+<T1 COMMIT>
+<CHECKPOINT {T2}>
+<T3 START>
+<T2, B, 1>
+<T3, C, 5, 6>
+<T2 ABORT>
+<T4 START>
+<T4, A, 4, 5>
+<T4 COMMIT>
+*crash*

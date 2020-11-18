@@ -1,0 +1,11 @@
+<T0 start>
+<T0, B, 2000, 2050>
+<T1 start>
+<checkpoint {T0, T1}>
+<T1, C, 700, 600>
+<T1 commit>
+<T2 start>
+<T2, A, 500, 400>
+<T0, B, 2000>
+<T0 abort>
+crash
