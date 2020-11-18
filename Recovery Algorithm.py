@@ -127,3 +127,4 @@ while 1:
     i-=1
     if i==0:
         print("Start for items in "+ str(L)+ " not found")
+        exit()
