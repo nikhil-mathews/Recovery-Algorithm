@@ -1,5 +1,6 @@
+
 import inspect
-import math
+
 
 
 def transaction_in(line):
@@ -48,7 +49,7 @@ def bottom_up_search(lines,s,start=None,end=0):      #searches from bottom to re
         start = len(lines) - 1
     while lines[start].find(s) == -1:
         start -= 1
-        if start==-1:
+        if start-end==-1:
             return None
     return start
 
@@ -65,20 +66,11 @@ checkpointloc=bottom_up_search(lines,"CHECKPOINT")
 L = set(transactions_in_checkpoint(lines[checkpointloc]))
 print("\nL: "+str(L)+"\n")
 
-
 # REDO PHASE
 print("**********REDO PHASE************")
 
-for i in range(checkpointloc):
-    if transaction_in(lines[i]) not in L:
-        lines[i]=None
 
-
-lines = [i for i in lines if i]
-
-print("Starting redo from line: "+lines[0]+"\n")
-
-for i in range(len(lines)):
+for i in range(checkpointloc+1,len(lines)):
     #print(lines[i])
     if lines[i].find("START")!=-1:
         L.add(transaction_in(lines[i]))
